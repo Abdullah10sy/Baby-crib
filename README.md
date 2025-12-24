@@ -1,71 +1,53 @@
-Project Title
+Baby Cry Detection with ESP32 and ThingSpeak
 
-Housing Price Prediction Using Linear Regression
+This project uses an ESP32 microcontroller to simulate baby cry detection using a potentiometer sensor. When the system detects a sound level above a threshold, it activates a buzzer and LED and sends the detected value to ThingSpeak for logging and visualization. Data is logged in the cloud via HTTP requests so behavior can be monitored remotely.
 
-Information
+Features
+*Connects to Wi-Fi and sends data to ThingSpeak using HTTP requests 
+*Detects simulated cry input (potentiometer reading)
+*Activates buzzer and LED on detection
+*Logs sound level to ThingSpeak for remote data visualization
 
-This repository contains a Python implementation of a simple linear regression model that predicts housing prices based on selected input features. The model uses the popular scikit-learn library and demonstrates the full workflow: loading data, preprocessing, model training, prediction, and evaluation.
+Hardware Required
 
-The solution illustrates how to:
+*ESP32 Development Board
+*Potentiometer (simulates sound sensor)
+*Buzzer
+*LED with suitable resistor
+*Jumper wires and breadboard
 
-Load and inspect structured tabular data using pandas.
+Installation
 
-Select feature columns and a target variable from a dataset.
+1.Open the Arduino IDE.
+2.Install the following libraries:
+      *WiFi.h (comes with ESP32 board support)
+      *HTTPClient.h for HTTP requests
+3.Add your Wi-Fi credentials and ThingSpeak Write API Key.
+4.If you haven’t created a ThingSpeak channel, log in and create one to obtain the API key. 
+5.Random Nerd Tutorials
+6.Upload the code to your ESP32 board.
 
-Split the dataset into training and test subsets for unbiased evaluation.
+Code Overview 
 
-Train a linear regression model.
+When the ESP32 reads an analog sound level above the cryThreshold, it will:
+    *Ring the buzzer
+    *Turn on the LED
+    *Send the value to ThingSpeak via a GET request
+    *Repeat every 2 seconds
+You can adjust the threshold to fit your input sensor’s range.
 
-Evaluate model performance using Mean Squared Error (MSE).
 
-Generate predictions on unseen test data.
+Usage
 
-This project is useful as a starter template for supervised learning regression problems and for understanding how regression modeling works in Python with real numerical data.
+1.After uploading code, open the Serial Monitor at 115200 to view debug messages.
+2.Turn the potentiometer — values above the threshold simulate a cry event.
+3.Visit your ThingSpeak channel to see live updates of the soundLevel field.
 
-Objective
 
-The primary objective of this repository is to demonstrate the implementation and evaluation of a linear regression model for predicting continuous outcomes (housing prices). Specifically, the goals are:
+Future Enhancements
+*Replace potentiometer with an actual microphone sound sensor
+*Add machine learning or signal processing to classify different cry patterns
+*Integrate notifications (email/SMS) using ThingSpeak Apps
 
-Data Preparation
-
-Load a housing dataset from a CSV file.
-
-Define input features and the target variable.
-
-Model Development
-
-Perform an 80/20 train/test split to simulate real-world prediction scenarios.
-
-Build and train a LinearRegression model from scikit-learn.
-
-Prediction and Evaluation
-
-Use the trained model to predict housing prices on test data.
-
-Quantify model performance using Mean Squared Error (MSE).
-
-Reusability
-
-Provide a clear, modular code structure that can be adapted for other regression tasks.
-
-Allow users to swap features, models, or evaluation metrics with minimal changes.
-
-By the end of this project, users will understand how to create, train, and evaluate a basic regression model in Python and how to document machine learning projects effectively in a GitHub repository.
-
-Example (Optional to Add)
-
-You can further expand your README with the following sections:
-
-Getting Started
-
-Installation instructions, requirements (requirements.txt), and how to run.
-
-Dataset
-
-A description of the dataset schema and sample rows.
-
-Results
-
-Example output including the printed Mean Squared Error value.
-
-If you want, I can also generate the full README with badges, installation instructions, usage examples, and a dataset description.
+License
+       -This project is released under the MIT License.
